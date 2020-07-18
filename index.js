@@ -9,10 +9,9 @@ function start(client) {
   client.onMessage((message) => {
 
     if(message.isMedia) {
-
-      const senderGRP = message.from;
       if(message.isGroupMsg) {
         
+        const senderGRP = message.from;
         if(!message.caption.includes('/sticker')) return;
 
         client.downloadFile(message).then(async bufer => {
