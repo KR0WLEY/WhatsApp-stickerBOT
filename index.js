@@ -18,7 +18,7 @@ function start(client) {
 
         client.decryptFile(message).then(async bufer => {
 
-          const b = new Buffer.from(Math.floor(Math.random() * 99999).toString()+message.mediaKey.toString('base64').split('/').join('x').slice(0, 25))
+          const b = new Buffer.from(Math.floor(Math.random() * 99999).toString()+message.mediaKey.toString('base64').split('/').join('x').slice(0, 18))
 
           const filename = `figurinhas/${b}.${mime.extension(message.mimetype)}`;
 
@@ -38,7 +38,7 @@ function start(client) {
         const sender = message.from;
         client.decryptFile(message).then(async buffer => {
 
-          const c = new Buffer.from(Math.floor(Math.random() * 99999).toString().slice(0, 18)+message.mediaKey.toString('base64').split('/').join('+-').slice(0, 15))
+          const c = new Buffer.from(Math.floor(Math.random() * 99999).toString().slice(0, 18)+message.mediaKey.toString('base64').split('/').join('_').slice(0, 15))
           const fileName = `figurinhas/${c}.${mime.extension(message.mimetype)}`;
   
           await fs.writeFile(fileName, buffer, (err) => {
