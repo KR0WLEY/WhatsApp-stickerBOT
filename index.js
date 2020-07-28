@@ -8,6 +8,9 @@ function start(client) {
 
   client.onMessage((message) => {
 
+    const sender = message.from;
+    console.log(sender)
+
     if(message.isMedia) {
 
       if(message.isGroupMsg) {
@@ -18,7 +21,7 @@ function start(client) {
 
         client.decryptFile(message).then(async bufer => {
 
-          const b = new Buffer.from(Math.floor(Math.random() * 99999).toString()+message.mediaKey.toString('base64').split('/').join('x').slice(0, 18))
+          const b = new Buffer.from(Math.floor(Math.random() * 99999).toString()+message.mediaKey.toString('base64').split('/').join('x').slice(6, 16))
 
           const filename = `figurinhas/${b}.${mime.extension(message.mimetype)}`;
 
@@ -34,11 +37,9 @@ function start(client) {
         })
         return;
       } else {
-
-        const sender = message.from;
+        
         client.decryptFile(message).then(async buffer => {
-
-          const c = new Buffer.from(Math.floor(Math.random() * 99999).toString().slice(0, 18)+message.mediaKey.toString('base64').split('/').join('_').slice(0, 15))
+          const c = new Buffer.from(Math.floor(Math.random() * 99999).toString().slice(0, 18)+message.mediaKey.toString('base64').split('/').join('_').slice(4, 16))
           const fileName = `figurinhas/${c}.${mime.extension(message.mimetype)}`;
   
           await fs.writeFile(fileName, buffer, (err) => {
@@ -52,4 +53,4 @@ function start(client) {
       }
     }
   });
-};
+}
